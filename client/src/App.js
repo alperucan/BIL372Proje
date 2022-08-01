@@ -20,7 +20,7 @@ function App() {
         <Router>
 
           <Header />
-
+         
             <Routes>
                   <Route index element={<Home/>}> </Route>
                   <Route path="products" element={<Product/>}> </Route>
@@ -28,8 +28,8 @@ function App() {
                   <Route path="users" element={<User/>}> </Route>
                   <Route path="reviews" element={<Review/>}> </Route>
 
-                  <Route path="products/:id" element={<h1>movie detail page</h1>}> </Route>
-                  <Route path="movie/:type" element={<h1>Movie list page</h1>}> </Route>
+                 
+                  
                   <Route path="/*" element={<h1>Error page</h1>}> </Route>
             </Routes>
 
