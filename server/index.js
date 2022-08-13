@@ -23,7 +23,7 @@ app.post('/products', (req,res) => {
     const rating =  req.body.rating;
     
     const imageUrl =  req.body.imageUrl;
-    //console.log(imageUrl)
+    //console.log(name)
     //console.log(req);
     db.query('INSERT INTO product (name,rating,release_date,image_url) VALUES (?,?,?,?)',
         [name,rating,releaseDate,imageUrl] ,
@@ -39,6 +39,33 @@ app.post('/products', (req,res) => {
         }
          )
 }) ;
+ app.post('/persons', (req,res) => {
+ 
+    const Pname = req.body.Pname;
+    const Lname = req.body.Lname;
+    const Sex = req.body.Sex;
+    const Bdate = req.body.Bdate;
+   
+    //console.log(imageUrl)
+    //console.log(req);
+    db.query('INSERT INTO person (Pname,Lname,Sex,Bdate) VALUES (?,?,?,?)',
+        [Pname,Lname,Sex,Bdate] ,
+        (err,result) => {
+
+            if(err)
+            {
+                console.log(err)
+            }else
+            {
+                res.send("Values Inserted");
+            }
+        }
+         )
+}) ; 
+
+
+
+
 
 app.get('/allproducts', (req,res) => {
  
@@ -56,11 +83,28 @@ app.get('/allproducts', (req,res) => {
 
 })
 
+app.get('/allpersons', (req,res) => {
+ 
+    
+    db.query('SELECT * FROM person ',(err,result) => {
+
+        if(err)
+        {
+            console.log(err)
+        }else
+        {
+            res.send(result);
+        }
+    } )
+
+})
+
+
 app.delete('/delete/:id', (req,res) => {
  
     const id = req.params.id;
-    console.log(req)
-    db.query('DELETE * FROM product WHERE id=?',id,(err,result) => {
+    console.log( req.params)
+    db.query('DELETE * FROM product WHERE (`Id` = ?)',id,(err,result) => {
 
         if(err)
         {

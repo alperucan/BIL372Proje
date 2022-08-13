@@ -10,21 +10,34 @@ const Review = () =>
     
   
     return (
-        <div class="box">
-        <form>
+
+        <div >
+           {/*  <div className="movie">
+                <div className="movie__intro">
+                    <img className="movie__backdrop" src={}/>
+                </div>
+            </div> */}
             
-            <div class="input-container">
-                <input type="text" onChange={(event) => {setRating(event.target.value)}} required=""/>
-                <label>Rating </label>		
-            </div>
-            <div class="input-container">
-                <input type="text" onChange={(event) => {setText(event.target.value)}} required=""/>
-                <label>Text</label>		
-            </div>
-           
-                <button type="button"  class="btn">Add Review</button>
-        </form>	
-    </div>
+
+
+             <div class="box">
+                <form>
+                    
+                    <div class="input-container">
+                        <input type="text" onChange={(event) => {setRating(event.target.value)}} required=""/>
+                        <label>Rating </label>		
+                    </div>
+                    <div class="input-container">
+                        <input type="text" onChange={(event) => {setText(event.target.value)}} required=""/>
+                        <label>Text</label>		
+                    </div>
+                
+                        <button type="button"  class="btn">Add Review</button>
+                </form>	
+            </div>   
+
+        </div>
+        
 
     )
 

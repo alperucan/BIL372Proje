@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import "./product.css"
 import { useState } from "react";
 import Axios from 'axios'
-import {Link} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+
 
 const Product = () =>
 {
@@ -18,7 +19,14 @@ const Product = () =>
 
     const[productList,setProductList] = useState([]);
 
-   
+    const navigate = useNavigate();
+    const goToMoviePage = ( key ) =>
+    {
+        /* jsarray = ["cat", "dog", "tiger", "wolf"];
+        sessionStorage.setItem("jsArray", JSON.stringify(jsarray));
+ */
+        navigate(`./${key}`);
+    }
     //TODO butona tikladiktan sonra eklemeli!
     const addProduct = () =>
     {
@@ -36,6 +44,7 @@ const Product = () =>
                 },
             ]);
         });
+        //console.log(name, releaseDate,rating,imageUrl)
     }
    
     // Axios.get('http://localhost:3001/products/allproducts') kabul etmiyor!
@@ -53,11 +62,19 @@ const Product = () =>
     useEffect(() => {
        getProducts();
     }, [])
-
-    /*const deleteProduct = (id) =>{
-        Axios.delete(`http://localhost:3001/delete/${id}`);
-        
-    };*/
+    /*
+    const deleteProduct = (id) =>{
+         <button class="btn" onClick={deleteProduct(val.Id)}>Delete</button>
+        Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
+            setProductList(
+                productList.filter((val) =>{
+                    return val.id != id;
+                })
+            );
+        });
+       // console.log(id);
+    };
+    */
     return (
        
         
@@ -90,11 +107,11 @@ const Product = () =>
             
            
         
-        <div class="container">
+        <div class="container" >
             
             {productList.map((val,key) =>{
                 return (
-                    <div key={key} class="movie-card">
+                    <div key={key} class="movie-card" onClick = {()=> goToMoviePage(key)}>
                         
                         <div >
                             <div class="movie-header manOfSteel">
@@ -122,7 +139,7 @@ const Product = () =>
                             
                                 </div>
                             </div>
-                            <button class="btn" >Delete</button>
+                           
                             
                             <button class="btn">Update</button>
                         </div>

@@ -28,8 +28,8 @@ function App() {
                   <Route path="users" element={<User/>}> </Route>
                   <Route path="reviews" element={<Review/>}> </Route>
 
-                 
                   
+                  <Route path="products/:id" element={<Review/>}></Route>
                   <Route path="/*" element={<h1>Error page</h1>}> </Route>
             </Routes>
 
