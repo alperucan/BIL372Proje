@@ -94,17 +94,13 @@ const Person = () =>
                     <div key={key} class="movie-card" >
                         
                         <div >
-                            <div class="movie-header manOfSteel">
-                                <div class="header-icon-container">
-                            
-                                </div>
-                            </div>
+                           
 
                             <div class="movie-content">
                                 <div class="movie-content-header">
                                     
-                                    <h3 class="movie-title">{val.Fname}</h3>
-                                    <h3 class="movie-title">{val.Lname}</h3>
+                                    <h3 class="movie-title">{val.Pname} {val.Lname}</h3>
+                                   
                                 </div>
                                 <div class="movie-info">
                                     <div class="info-section">
