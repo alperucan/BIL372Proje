@@ -6,10 +6,10 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 const db = mysql.createConnection({
-    
-    user: "root", //kendi userın defaultu root
-    host: "localhost",
-    password: "a61a32u1998",  //kendi sifren
+
+    user:'root',
+    host:'localhost',
+    password:'q123',
     database: "mydb", //kendi db name
 
 
@@ -24,7 +24,7 @@ app.post('/products', (req,res) => {
     
     const imageUrl =  req.body.imageUrl;
     //console.log(name)
-    //console.log(req);
+    console.log(req);
     db.query('INSERT INTO product (name,rating,release_date,image_url) VALUES (?,?,?,?)',
         [name,rating,releaseDate,imageUrl] ,
         (err,result) => {
@@ -100,11 +100,10 @@ app.get('/allpersons', (req,res) => {
 })
 
 
-app.delete('/delete/:id', (req,res) => {
- 
-    const id = req.params.id;
-    console.log( req.params)
-    db.query('DELETE * FROM product WHERE (`Id` = ?)',id,(err,result) => {
+app.delete('/delete/:Id', (req,res) => {
+
+    console.log(req.params.Id)
+    db.query('DELETE FROM product WHERE Id = ?',req.params.Id,(err,result) => {
 
         if(err)
         {
