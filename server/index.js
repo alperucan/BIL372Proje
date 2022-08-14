@@ -9,7 +9,7 @@ const db = mysql.createConnection({
 
     user:'root',
     host:'localhost',
-    password:'q123',
+    password:'a61a32u1998',
     database: "mydb", //kendi db name
 
 
@@ -32,6 +32,30 @@ app.post('/products', (req,res) => {
             if(err)
             {
                 console.log(err)
+            }else
+            {
+                res.send("Values Inserted");
+            }
+        }
+         )
+}) ;
+
+app.post('/productReview', (req,res) => {
+ 
+    const text = req.body.text;
+    const ID = req.body.Id;
+
+    //user ıd cekilip alıncak
+    const U_ID =1;
+    console.log(req)
+    db.query('INSERT INTO review (U_ID,ID,Text) VALUES (1,?,?)',
+        [U_ID,text,ID] ,
+        (err,result) => {
+
+            if(err)
+            {
+                console.log(err)
+                console.log(text + ID + U_ID)
             }else
             {
                 res.send("Values Inserted");
@@ -63,7 +87,31 @@ app.post('/products', (req,res) => {
          )
 }) ; 
 
+app.get('/allproductReview', (req,res) => {
+   
+    db.query('SELECT * FROM review ',(err,result) => {
 
+        if(err)
+        {
+            console.log(err)
+        }else
+        {
+            res.send(result);
+        }
+    } )
+    
+  /*   db.query('SELECT * FROM review WHERE ID = ? ',[req.body.Id],(err,result) => {
+
+        if(err)
+        {
+            console.log(err)
+        }else
+        {
+            res.send(result);
+        }
+    } )
+ */
+})
 
 
 
@@ -83,6 +131,7 @@ app.get('/allproducts', (req,res) => {
 
 })
 
+
 app.get('/allpersons', (req,res) => {
  
     
@@ -98,6 +147,8 @@ app.get('/allpersons', (req,res) => {
     } )
 
 })
+
+
 
 
 app.delete('/delete/:Id', (req,res) => {

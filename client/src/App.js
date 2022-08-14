@@ -29,9 +29,10 @@ function App() {
                   <Route path="products" element={<Product/>}> </Route>
                   <Route path="persons" element={<Person/>}> </Route>
                   <Route path="users" element={<User/>}> </Route>
-                  <Route path="reviews" element={<Review/>}> </Route>
+                 
                   <Route path="login" element={<Login/>}> </Route>
                   <Route path="register" element={<Register/>}> </Route>
+
                   <Route path="products/:id" element={<MoviePage/>}></Route>
                   <Route path="/*" element={<h1>Error page</h1>}> </Route>
             </Routes>

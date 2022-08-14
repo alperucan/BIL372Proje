@@ -109,9 +109,9 @@ const Product = () =>
         
         <div class="container" >
             
-            {productList.map((val,key) =>{
+            {productList.map((val) =>{
                 return (
-                    <div key={key} class="movie-card" onClick = {()=> goToMoviePage(key)}>
+                    <div  class="movie-card" onClick = {()=> goToMoviePage(val.Id)}>
                         
                         <div >
                             <div class="movie-header manOfSteel">
