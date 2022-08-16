@@ -11,12 +11,9 @@ const Header = () =>
                 <Link to="/products" style={{textDecoration: "none"}}><span>Products</span></Link>
                 
                 <Link to="/persons" style={{textDecoration: "none"}}><span>Persons</span></Link>
+            </div>
+            <div className="headerRight">
                 <Link to="/users" style={{textDecoration: "none"}}><span>User Profile</span></Link>
-                <div >
-                    <Link to="/login" style={{textDecoration: "none"}}><span>Login</span></Link>
-                    <Link to="/register" style={{textDecoration: "none"}}><span>Register</span></Link>
-                </div>
-
             </div>
             
         </div>  

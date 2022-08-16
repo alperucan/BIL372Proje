@@ -18,20 +18,19 @@ const Product = () =>
     const[imageUrl,setImageUrl] = useState("");
 
     const[productList,setProductList] = useState([]);
-
     const navigate = useNavigate();
     const goToMoviePage = ( key ) =>
     {
         /* jsarray = ["cat", "dog", "tiger", "wolf"];
         sessionStorage.setItem("jsArray", JSON.stringify(jsarray));
- */
+ */     
         navigate(`./${key}`);
     }
     //TODO butona tikladiktan sonra eklemeli!
     const addProduct = () =>
     {
 
-        Axios.post('http://localhost:3001/products',{name:name,releaseDate:releaseDate,rating:rating,imageUrl:imageUrl})
+        Axios.post('http://localhost:3001/products/insert',{name:name,releaseDate:releaseDate,rating:rating,imageUrl:imageUrl})
         .then(()=>{
             //hemen eklemiyor 
             setProductList(
@@ -52,7 +51,7 @@ const Product = () =>
     /// NOTE val. Dbdeki column nameler olmalı yani {val.Name} gibi
     const getProducts =() =>{
 
-        Axios.get('http://localhost:3001/allproducts').then((response) => {
+        Axios.get('http://localhost:3001/products/select').then((response) => {
             setProductList(response.data);
             //console.log(response.data);
             
@@ -62,10 +61,12 @@ const Product = () =>
     useEffect(() => {
        getProducts();
     }, [])
-    /*
-    const deleteProduct = (id) =>{
-         <button class="btn" onClick={deleteProduct(val.Id)}>Delete</button>
-        Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
+    
+     const deleteProduct = (id) =>{
+       
+        console.log("Delete " + id)
+        
+        Axios.delete(`http://localhost:3001/products/delete/${id}`).then((response) => {
             setProductList(
                 productList.filter((val) =>{
                     return val.id != id;
@@ -73,37 +74,36 @@ const Product = () =>
             );
         });
        // console.log(id);
-    };
-    */
+    };  
+    
     return (
        
         
-        <div >
-           
-            
-            <form>
-            <div class="deneme">
-                <div class="input-container2">
-                    <input type="text" onChange={(event) => {setName(event.target.value)}} required=""/>
-                    <label>Name</label>		
-                </div>
-                <div class="input-container2">
-                    <input type="text" onChange={(event) => {setReleaseDate(event.target.value)}} required=""/>
-                    <label>Release Date</label>		
-                </div>
-                <div class="input-container2">
-                    <input type="text" onChange={(event) => {setRating(event.target.value)}} required=""/>
-                    <label>Rating</label>		
-                </div>
-                <div class="input-container2">		
-                    <input type="text" onChange={(event) => {setImageUrl(event.target.value)}} required=""/>
-                    <label>Image URL </label>
-                </div>
-                <button type="button" onClick={addProduct} class="btn">Add Product</button>
-            </div>   
-           
-        </form>
-           
+        <div >        
+            { (global.userinfo.U_ID==1 || global.userinfo.U_ID==2) &&
+                    <form>
+                    <div class="deneme">
+                        <div class="input-container2">
+                            <input type="text" onChange={(event) => {setName(event.target.value)}} required=""/>
+                            <label>Name</label>		
+                        </div>
+                        <div class="input-container2">
+                            <input type="text" onChange={(event) => {setReleaseDate(event.target.value)}} required=""/>
+                            <label>Release Date</label>		
+                        </div>
+                        <div class="input-container2">
+                            <input type="text" onChange={(event) => {setRating(event.target.value)}} required=""/>
+                            <label>Rating</label>		
+                        </div>
+                        <div class="input-container2">		
+                            <input type="text" onChange={(event) => {setImageUrl(event.target.value)}} required=""/>
+                            <label>Image URL </label>
+                        </div>
+                        <button type="button" onClick={addProduct} class="btn">Add Product</button>
+                    </div>   
+                
+                    </form>
+            }
             
            
         
@@ -111,13 +111,13 @@ const Product = () =>
             
             {productList.map((val) =>{
                 return (
-                    <div  class="movie-card" onClick = {()=> goToMoviePage(val.Id)}>
+                    <div  class="movie-card" >
                         
                         <div >
-                            <div class="movie-header manOfSteel">
+                            <div class="movie-header manOfSteel" onClick = {()=> goToMoviePage(val.ID)}>
                                 <div class="header-icon-container">
                                 
-                                    <img src={val.Image_url} class="material-icons header-icon"/>
+                                    <img src={val.image_url} class="material-icons header-icon"/>
                                     
                                 </div>
                             </div>
@@ -140,8 +140,10 @@ const Product = () =>
                                 </div>
                             </div>
                            
-                            
-                            <button class="btn">Update</button>
+                            {(global.userinfo.U_ID==1 || global.userinfo.U_ID==2) &&
+                                <button class="btn" onClick={() => {deleteProduct(val.ID)} }>Delete</button>}
+                            {(global.userinfo.U_ID==1 || global.userinfo.U_ID==2) &&
+                                <button class="btn">Update</button>}
                         </div>
                      </div>
                     
